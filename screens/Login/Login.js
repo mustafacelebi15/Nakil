@@ -23,25 +23,25 @@ const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.TextContainer} >
-      <Text style={styles.title}>Giriş Ekranı</Text>
+      <Text style={styles.title}>{I18n.t('loginscreen')}</Text>
       </View>
       <View style={styles.contentContainer}>
         <TextInput
           style={styles.input}
-          placeholder="E-mail adresinizi giriniz."
+          placeholder={I18n.t('email')}
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           style={styles.input}
-          placeholder="Şifrenizi giriniz."
+          placeholder={I18n.t('password')}
           value={password}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
         />
       </View>
       <View style={styles.ButtonContainer}>
-        <Button style={styles.button} title="Giriş Yap" onPress={checkLogin} />
+        <Button style={styles.button} title={I18n.t('login')}onPress={checkLogin} />
       </View>
     </View>
   );
