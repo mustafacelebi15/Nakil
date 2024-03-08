@@ -6,6 +6,7 @@ import NetInfo from '@react-native-community/netinfo';
 
 import Button from '../../Components/Button';
 import styles from "./SignUp.style";
+import I18n from '../../android/app/src/lang/_i18n';
 
 const Anasayfa = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -75,12 +76,12 @@ const Anasayfa = ({ navigation }) => {
       <SafeAreaView>
         <View style={styles.contentContainer}>
           <View style={styles.TextContainer}>
-          <Text style={styles.title}>Hesap Oluştur</Text>
+          <Text style={styles.title}>{I18n.t('create')}</Text>
           </View>
-          <TextInput style={styles.input} placeholder="E-mail adresinizi giriniz." value={email} onChangeText={(text) => setEmail(text)} />
-          <TextInput style={styles.input} placeholder="Şifrenizi giriniz." value={password} onChangeText={(text) => setPassword(text)} secureTextEntry />
+          <TextInput style={styles.input} placeholder={I18n.t('email')} value={email} onChangeText={(text) => setEmail(text)} />
+          <TextInput style={styles.input} placeholder={I18n.t('password')} value={password} onChangeText={(text) => setPassword(text)} secureTextEntry />
           <View style={styles.ButtonContainer}>
-            <Button title="Sign Up" onPress={createAccount}/>
+            <Button title={I18n.t('signup')} onPress={createAccount}/>
           </View>
         </View>
       </SafeAreaView>
