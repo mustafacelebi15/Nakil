@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "30396561645",
+    "project_id": "nakil-39689",
+    "storage_bucket": "nakil-39689.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30396561645:android:61d3da9971a921b5e774e4",
+        "android_client_info": {
+          "package_name": "com.nakkil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA946skcR5peLacrfIXX8A-tdH86DPbMFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
