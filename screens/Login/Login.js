@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import styles from './Login.style';
 import Button from '../../Components/Button';
+import I18n from '../../android/app/src/lang/_i18n';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState(null);
@@ -12,9 +15,9 @@ const Login = ({ navigation }) => {
     try {
       const userCredential = await auth().signInWithEmailAndPassword(email, password);
       console.log('User logged in:', userCredential.user);
-      navigation.navigate('Welcome')
+      await AsyncStorage.setItem('@hasLogin', 'true');
+      navigation.navigate('Welcome');
     } catch (error) {
-      // Handle login errors
       console.error('Login error:', error);
       Alert.alert('Login Failed', 'Invalid username or password');
     }

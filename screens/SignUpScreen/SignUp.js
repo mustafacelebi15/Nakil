@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, SafeAreaView, TextInput, Alert, Linking} from '
 import SplashScreen from 'react-native-splash-screen';
 import auth from '@react-native-firebase/auth';
 import NetInfo from '@react-native-community/netinfo';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../../Components/Button';
 import styles from "./SignUp.style";
@@ -63,13 +64,39 @@ const Anasayfa = ({ navigation }) => {
     );
   };
 
-  const createAccount = () => {
+  const createAccount = async () => {
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(res => console.log(res))
       .catch(err => console.log(err));
+      await AsyncStorage.setItem('@email', email);
+      await AsyncStorage.setItem('@password', password);
+      await AsyncStorage.setItem('@hasLogin', 'false');
       navigation.navigate('Login');
   };
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const username = await AsyncStorage.getItem('@email');
+        const password = await AsyncStorage.getItem('@password');
+        const hasLogin = await AsyncStorage.getItem('@hasLogin');
+        if (username && password && hasLogin === 'true') {
+          navigation.navigate('Welcome');
+        }else if (username && password && hasLogin === 'false'){
+          navigation.navigate('Login');
+        }
+        else{
+          navigation.navigate('SignUp');
+        }
+      } catch (error) {
+        console.error('Error checking login information:', error);
+      }
+    };
+
+    checkLogin();
+  }, [navigation]);
+  
 
   return (
     <View style={styles.container}>
