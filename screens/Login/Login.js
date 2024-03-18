@@ -16,6 +16,7 @@ const Login = ({ navigation }) => {
       const userCredential = await auth().signInWithEmailAndPassword(email, password);
       console.log('User logged in:', userCredential.user);
       await AsyncStorage.setItem('@hasLogin', 'true');
+      await AsyncStorage.setItem('@email', email);
       navigation.navigate('Welcome');
     } catch (error) {
       console.error('Login error:', error);

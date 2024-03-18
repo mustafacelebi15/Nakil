@@ -7,24 +7,53 @@ import Button from '../../Components/Button';
 import styles from "./Welcome.style";
 
 const Welcome = ({ navigation }) => {
-  useEffect(() => {
-    const unsubscribe = firestore().collection('Users').onSnapshot(querySnapshot => {
-      if (querySnapshot) {
-        const users = [];
-        querySnapshot.forEach(documentSnapshot => {
-          users.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-        console.log('Users: ', users);
-      } else {
-        console.log('No users found');
-      }
-    });
+  const [Name, setName] = useState('');
+  const [Surname, setSurname] = useState('');
+  const [PhoneNumber, setPhoneNumber] = useState('');
+  const [TcId, setTcId] = useState('');
+  const [isTasiyici, setIsTasiyici] = useState(false);
+  const [email, setEmail] = useState('');
   
-    return () => unsubscribe();
+  useEffect(() => {
+    getEmailAndFetchUser();
   }, []);
+ 
+  const getEmailAndFetchUser = async () => {
+    try {
+      const userEmail = await AsyncStorage.getItem('@email');
+      setEmail(userEmail);
+      console.log(email); // Burada `email` değeri hala güncellenmemiş olabilir, bu nedenle doğru değeri almak için direkt `userEmail` kullanın
+      fetchUserByEmail(userEmail);
+    } catch (error) {
+      console.error('Error getting email:', error);
+    }
+  };
+  const fetchUserByEmail = async (email) => {
+    try {
+      const userRef = firestore().collection('Users').where('email', '==', email);
+      const snapshot = await userRef.get();
+  
+      if (snapshot.empty) {
+        console.log('Kullanıcı bulunamadı');
+        return;
+      }
+  
+      snapshot.forEach(doc => {
+        const userData = doc.data();
+        console.log('User:', userData.isTasiyici);
+        
+        if(userData.isTasiyici){
+          navigation.navigate('TasHome');
+        }
+        else{
+          navigation.navigate('IsHome');
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching user by email:', error);
+    }
+  };
+  
   const removeLoginInfo = async () => {
     try {
       await AsyncStorage.removeItem('@email');
@@ -35,11 +64,6 @@ const Welcome = ({ navigation }) => {
       console.error('Error removing login information:', error);
     }
   };
-  const [Name, setName] = useState('');
-  const [Surname, setSurname] = useState('');
-  const [PhoneNumber, setPhoneNumber] = useState('');
-  const [TcId, setTcId] = useState('');
-  const [isTasiyici, setIsTasiyici] = useState(false);
 
   const addUser = async () => {
     try {
@@ -49,9 +73,15 @@ const Welcome = ({ navigation }) => {
         PhoneNumber,
         TcId,
         isTasiyici,
+        email,
       });
       console.log('User added!');
-      // Kullanıcı eklendikten sonra gerekli işlemler yapılabilir
+      if (isTasiyici){
+        navigation.navigate('TasHome');
+      }
+      else{
+        navigation.navigate('IsHome');
+      }
     } catch (error) {
       console.error('Error adding user: ', error);
     }
