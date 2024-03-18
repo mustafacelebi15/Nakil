@@ -109,6 +109,7 @@ const Anasayfa = ({ navigation }) => {
           <TextInput style={styles.input} placeholder={I18n.t('password')} value={password} onChangeText={(text) => setPassword(text)} secureTextEntry />
           <View style={styles.ButtonContainer}>
             <Button title={I18n.t('signup')} onPress={createAccount}/>
+            <Button title="Zaten hesabın var mı?" onPress={() => navigation.navigate('Login')} />
           </View>
         </View>
       </SafeAreaView>
