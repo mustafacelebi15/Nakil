@@ -2,19 +2,22 @@ import { StyleSheet } from "react-native";
 
 
 export default StyleSheet.create ({
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
+        justifyContent: 'center',
         backgroundColor: '#FC9483',
-    },
+        paddingLeft:5,
+        paddingRight:5,
+      },
     TextContainer:{
         marginTop:20,
         alignItems:'center',
     },
     title: {
-        fontSize:40,
+        fontSize:15,
         color: "white",
-        fontWeight:"800",
-        marginBottom: 16,
+        fontWeight:"500",
+        marginBottom: 10,
     },
     contentContainer:{
         padding:16,
@@ -33,5 +36,13 @@ flexDirection: "row",
 marginTop: 32,
 justifyContent:'flex-end'
 },
+advertisementItem: {
+    padding: 10,
+    marginVertical: 5,
+    backgroundColor: 'black',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+  },
 
 })
