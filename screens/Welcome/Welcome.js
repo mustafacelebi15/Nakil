@@ -22,7 +22,7 @@ const Welcome = ({ navigation }) => {
     try {
       const userEmail = await AsyncStorage.getItem('@email');
       setEmail(userEmail);
-      console.log(email); // Burada `email` değeri hala güncellenmemiş olabilir, bu nedenle doğru değeri almak için direkt `userEmail` kullanın
+      console.log(email);
       fetchUserByEmail(userEmail);
     } catch (error) {
       console.error('Error getting email:', error);
