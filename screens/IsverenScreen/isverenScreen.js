@@ -79,6 +79,7 @@ const isverenScreen = ({ navigation }) => {
       <View style={styles.ButtonContainer}>
       <Button title={"İlan oluştur."} onPress={addAdvert}/>
       <Button title={"Çıkış Yap"} onPress={removeLoginInfo}/>
+      <Button title={"Onay Bekleyen Teklifleri Görüntüle"} onPress={() => navigation.navigate('IsOffers')}/>
       </View>
       </View>
     </View>

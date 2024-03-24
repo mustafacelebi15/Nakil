@@ -9,6 +9,7 @@ import Login from './screens/Login';
 import Home from './screens/Home';
 import IsHome from './screens/IsverenScreen';
 import TasHome from './screens/TasiyiciScreen';
+import IsOffers from './screens/IsOffers';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ function MyStack() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="IsHome" component={IsHome} />
       <Stack.Screen name="TasHome" component={TasHome} />
+      <Stack.Screen name= "IsOffers" component={IsOffers}/>
     </Stack.Navigator>
     </NavigationContainer>
   );
