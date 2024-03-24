@@ -4,9 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 
 import Button from '../../Components/Button';
-import styles from "./tasiyiciScreen.style";
+import styles from "./IsOffers.style";
 
-const TasiyiciScreen = () => {
+const IsOffers = () => {
   const [advertisements, setAdvertisements] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const TasiyiciScreen = () => {
 
   const fetchAdvertisements = async () => {
     try {
-      const userRef = firestore().collection('Nakils').where('confirmation', '==', false);
+      const userRef = firestore().collection('Nakils').where('confirmation', '==', false).where('visible', '==', false);
       const snapshot = await userRef.get();
 
       if (snapshot.empty) {
@@ -33,43 +33,40 @@ const TasiyiciScreen = () => {
       console.error('Error fetching advertisements:', error);
     }
   };
-
-  const handleOffer = async (id) => {
-    const userEmail = await AsyncStorage.getItem('@email');
-    Alert.alert(
-      'Teklif Ver',
-      'Bu ilana teklif vermek istediğinizden emin misiniz?',
-      [
-        {
-          text: 'Hayır',
-          style: 'cancel',
-        },
-        {
-          text: 'Evet',
-          onPress: async () => {
-            try {
-              await firestore().collection('Nakils').doc(id).update({ visible: false, carrier: userEmail });
-              Alert.alert('Teklif Verildi', 'Teklifiniz başarıyla verildi.');
-              fetchAdvertisements();
-            } catch (error) {
-              console.error('Error updating advertisement:', error);
-              Alert.alert('Hata', 'Teklif verme işlemi sırasında bir hata oluştu.');
-            }
-          },
-        },
-      ],
-    );
+  const handleApproval = async (id) => {
+    try {
+      await firestore().collection('Nakils').doc(id).update({ confirmation: true });
+      console.log('Advertisement approved successfully');
+    } catch (error) {
+      console.error('Error approving advertisement:', error);
+    }
   };
+  
+  const handleRejection = async (id) => {
+    try {
+      await firestore().collection('Nakils').doc(id).update({visible: true, carrier: ''});
+      console.log('Advertisement rejected successfully');
+    } catch (error) {
+      console.error('Error rejecting advertisement:', error);
+    }
+  };
+  
 
   const renderAdvertisementItem = ({ item }) => (
-    <TouchableOpacity onPress={() => handleOffer(item.id)}>
       <View style={styles.advertisementItem}>
-        <Text style={styles.title}>İşveren: {item.advertiser}</Text>
+        <Text style={styles.title}>Taşıyıcı: {item.carrier}</Text>
         <Text style={styles.title}>Nereden: {item.from}</Text>
         <Text style={styles.title}>Nereye: {item.where}</Text>
         <Text style={styles.title}>Fiyat: {item.price}</Text>
+        <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.buttonaccept} onPress={() => handleApproval(item.id)}>
+          <Text style={styles.buttonText}>Onayla</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonreject} onPress={() => handleRejection(item.id)}>
+          <Text style={styles.buttonText}>Reddet</Text>
+        </TouchableOpacity>
+        </View>
       </View>
-    </TouchableOpacity>
   );
 
   return (
@@ -83,4 +80,4 @@ const TasiyiciScreen = () => {
   );
 };
 
-export default TasiyiciScreen;
+export default IsOffers;
