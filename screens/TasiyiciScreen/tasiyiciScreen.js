@@ -6,7 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import Button from '../../Components/Button';
 import styles from "./tasiyiciScreen.style";
 
-const TasiyiciScreen = () => {
+const TasiyiciScreen = ({ navigation }) => {
   const [advertisements, setAdvertisements] = useState([]);
 
   useEffect(() => {
@@ -79,6 +79,9 @@ const TasiyiciScreen = () => {
         renderItem={renderAdvertisementItem}
         keyExtractor={(item) => item.id}
       />
+      <View style={styles.ButtonContainer}>
+      <Button title="Tekliflerimi görüntüle" onPress={() => navigation.navigate('TasOffers')} />
+      </View>
     </View>
   );
 };
