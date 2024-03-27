@@ -10,6 +10,7 @@ import Home from './screens/Home';
 import IsHome from './screens/IsverenScreen';
 import TasHome from './screens/TasiyiciScreen';
 import IsOffers from './screens/IsOffers';
+import TasOffers from './screens/TasOffers';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ function MyStack() {
       <Stack.Screen name="IsHome" component={IsHome} />
       <Stack.Screen name="TasHome" component={TasHome} />
       <Stack.Screen name= "IsOffers" component={IsOffers}/>
+      <Stack.Screen name= "TasOffers" component={TasOffers}/>
     </Stack.Navigator>
     </NavigationContainer>
   );

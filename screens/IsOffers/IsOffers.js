@@ -8,15 +8,16 @@ import styles from "./IsOffers.style";
 
 const IsOffers = () => {
   const [advertisements, setAdvertisements] = useState([]);
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
-    fetchAdvertisements();
+    getEmailAndFetchUser();
   }, []);
 
-  const fetchAdvertisements = async () => {
+  const fetchAdvertisements = async (userEmail) => {
     try {
-      const userRef = firestore().collection('Nakils').where('confirmation', '==', false).where('visible', '==', false);
-      const snapshot = await userRef.get();
+      const userRef = firestore().collection('Nakils').where('advertiser', '==', userEmail).where('confirmation', '==', false).where('visible', '==', false);
+      const snapshot = await userRef.get(); 
 
       if (snapshot.empty) {
         console.log('Teklif Bulunamadı');
@@ -48,6 +49,16 @@ const IsOffers = () => {
       console.log('Advertisement rejected successfully');
     } catch (error) {
       console.error('Error rejecting advertisement:', error);
+    }
+  };
+  const getEmailAndFetchUser = async () => {
+    try {
+      const userEmail = await AsyncStorage.getItem('@email');
+      setEmail(userEmail);
+      fetchAdvertisements(userEmail);
+      console.log(email);
+    } catch (error) {
+      console.error('Error getting email:', error);
     }
   };
   

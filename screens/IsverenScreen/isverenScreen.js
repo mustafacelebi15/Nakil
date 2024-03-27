@@ -23,7 +23,7 @@ const isverenScreen = ({ navigation }) => {
     try {
       const userEmail = await AsyncStorage.getItem('@email');
       setAdvertiser(userEmail);
-      console.log(email);
+      console.log(advertiser);
     } catch (error) {
       console.error('Error getting email:', error);
     }
