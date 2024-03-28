@@ -53,7 +53,6 @@ const TasOffers = () => {
     switch (status) {
       case 1:
         statusText = 'Taşınmaya Hazır';
-
         break;
       case 2:
         statusText = 'Yolda';
