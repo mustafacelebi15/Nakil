@@ -70,7 +70,7 @@ const TasOffers = () => {
     const handleStatusIncrease = () => {
       Alert.alert(
         'Onaylıyor musunuz?',
-        'Durumu arttırmak istediğinize emin misiniz?',
+        'Yükün durumunu değiştirmek istediğinize emin misiniz?',
         [
           {
             text: 'Hayır',
