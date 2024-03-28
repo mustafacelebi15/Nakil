@@ -14,6 +14,7 @@ const isverenScreen = ({ navigation }) => {
   const [price, setPrice] = useState('');
   const [where, setWhere] = useState('');
   const [ontheway, setOntheway] = useState(false);
+  const [pos, setPos] = useState(0);
   
   useEffect(() => {
     getEmailAndFetchUser();
@@ -51,6 +52,7 @@ const isverenScreen = ({ navigation }) => {
         ontheway,
         price,
         where,
+        pos,
       });
       console.log('nakils added!');
     } catch (error) {
