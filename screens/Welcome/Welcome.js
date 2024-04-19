@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
+import { LogLevel, OneSignal } from 'react-native-onesignal';
 
 import Button from '../../Components/Button';
 import styles from "./Welcome.style";
@@ -13,6 +14,7 @@ const Welcome = ({ navigation }) => {
   const [TcId, setTcId] = useState('');
   const [isTasiyici, setIsTasiyici] = useState(false);
   const [email, setEmail] = useState('');
+
   
   useEffect(() => {
     getEmailAndFetchUser();
@@ -66,6 +68,7 @@ const Welcome = ({ navigation }) => {
   };
 
   const addUser = async () => {
+    OneSignal.login(email);
     try {
       await firestore().collection('Users').add({
         Name,
