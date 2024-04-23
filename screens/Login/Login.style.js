@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 
 
 export default StyleSheet.create ({
+    imageBackground: {
+        flex: 1,
+        resizeMode: 'center',
+      },
     container:{
         flex:1,
         backgroundColor: '#FC9483',
@@ -12,8 +16,8 @@ export default StyleSheet.create ({
     },
     title: {
         fontSize:40,
-        color: "white",
         fontWeight:"800",
+        color: 'rgba(0, 0, 0, 0.5)',
     },
     contentContainer:{
         padding:16,
@@ -21,6 +25,7 @@ export default StyleSheet.create ({
     },
     input:{
         backgroundColor: "black",
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
         fontSize: 15,
         marginTop: 20,
         paddingHorizontal: 16,

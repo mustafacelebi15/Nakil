@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, Alert } from 'react-native';
+import { Text, View, TextInput, Alert, ImageBackground} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -26,6 +26,7 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ImageBackground style={styles.imageBackground} source={require('../../Assets/harita.jpg')} >
       <View style={styles.TextContainer} >
       <Text style={styles.title}>{I18n.t('loginscreen')}</Text>
       </View>
@@ -47,6 +48,7 @@ const Login = ({ navigation }) => {
       <View style={styles.ButtonContainer}>
         <Button style={styles.button} title={I18n.t('login')}onPress={checkLogin} />
       </View>
+      </ImageBackground>
     </View>
   );
 };

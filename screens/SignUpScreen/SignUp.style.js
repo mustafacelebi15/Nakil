@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 
 
 export default StyleSheet.create ({
+    imageBackground: {
+        flex: 1,
+        resizeMode: 'center',
+      },
     container:{
         flex:1,
         backgroundColor: '#FC9483',
@@ -12,7 +16,8 @@ export default StyleSheet.create ({
     },
     title: {
         fontSize:40,
-        color: "white",
+        color: "black",
+        color: 'rgba(0, 0, 0, 0.5)',
         fontWeight:"800",
         marginBottom: 16,
     },
@@ -21,7 +26,8 @@ export default StyleSheet.create ({
         marginTop:20,
     },
     input:{
-        backgroundColor: "black",
+        backgroundColor:  "black",
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         fontSize: 15,
         marginTop: 20,
         paddingHorizontal: 16,
@@ -31,7 +37,7 @@ export default StyleSheet.create ({
     ButtonContainer: {
 flexDirection: "row",
 marginTop: 32,
-justifyContent:'flex-end'
+justifyContent:'flex-end',
 },
 
 })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TextInput, Alert, Linking} from 'react-native';  // Alert ekleniyor
+import { View, Text, StyleSheet, SafeAreaView, TextInput, Alert, Linking, ImageBackground} from 'react-native';  // Alert ekleniyor
 import SplashScreen from 'react-native-splash-screen';
 import auth from '@react-native-firebase/auth';
 import NetInfo from '@react-native-community/netinfo';
@@ -100,6 +100,7 @@ const Anasayfa = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ImageBackground style={styles.imageBackground} source={require('../../Assets/harita.jpg')} >
       <SafeAreaView>
         <View style={styles.contentContainer}>
           <View style={styles.TextContainer}>
@@ -113,7 +114,9 @@ const Anasayfa = ({ navigation }) => {
           </View>
         </View>
       </SafeAreaView>
+      </ImageBackground>
     </View>
+   
   );
 };
 
