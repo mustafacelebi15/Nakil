@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Alert } from 'react-native';
+import { View, Text, FlatList, Alert, ScrollView, ImageBackground} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 
@@ -14,6 +14,17 @@ const TasOffers = () => {
   useEffect(() => {
     getEmailAndFetchUser();
   }, [status]);
+
+  const removeLoginInfo = async () => {
+    try {
+      await AsyncStorage.removeItem('@email');
+      await AsyncStorage.removeItem('@password');
+      await AsyncStorage.removeItem('@hasLogin');
+      navigation.navigate('SignUp');
+    } catch (error) {
+      console.error('Error removing login information:', error);
+    }
+  };
 
   const getEmailAndFetchUser = async () => {
     try {
@@ -48,9 +59,11 @@ const TasOffers = () => {
 
   const renderAdvertisementItem = ({ item }) => {
 
-    setStatus(item.pos)
     let statusText = '';
-    switch (status) {
+    switch (item.pos) {
+      case 0:
+        statusText = 'Onay Bekliyor';
+        break;
       case 1:
         statusText = 'Taşınmaya Hazır';
         break;
@@ -77,19 +90,29 @@ const TasOffers = () => {
           },
           {
             text: 'Evet',
-            onPress: () => increaseStatus(),
+            onPress: () => increaseStatus(item.id),
           },
         ],
         { cancelable: false }
       );
     };
   
-    const increaseStatus = async () => {
-      const newStatus = status + 1;
+    const increaseStatus = async (advertisementId) => {
       try {
-        await firestore().collection('Nakils').doc(item.id).update({ pos: newStatus });
-        setStatus(newStatus);
+        const adRef = firestore().collection('Nakils').doc(advertisementId);
+        const doc = await adRef.get();
+    
+        if (!doc.exists) {
+          console.log('İlan bulunamadı');
+          return;
+        }
+    
+        const currentStatus = doc.data().pos;
+        const newStatus = currentStatus + 1;
+    
+        await adRef.update({ pos: newStatus });
         Alert.alert('Başarılı', 'Durum başarıyla arttırıldı.');
+        setStatus(status+1);
       } catch (error) {
         console.error('Error updating status:', error);
         Alert.alert('Hata', 'Durum güncelleme işlemi sırasında bir hata oluştu.');
@@ -109,13 +132,22 @@ const TasOffers = () => {
   };
   
 
-return (
+  return (
     <View style={styles.container}>
+      <ImageBackground style={styles.imageBackground} source={require('../../Assets/splashscrn.png')} >
+        <View style={styles.ButtonContainer}>
+      <Button title="Çıkış Yap" onPress={removeLoginInfo} />
+      </View>
+     <ScrollView>
+      <View style= {styles.contentContainer}>
       <FlatList
         data={advertisements}
         renderItem={renderAdvertisementItem}
         keyExtractor={(item) => item.id}
       />
+      </View>
+      </ScrollView>
+    </ImageBackground>
     </View>
   );
 };

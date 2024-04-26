@@ -5,9 +5,11 @@ export default StyleSheet.create ({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#FC9483',
-        paddingLeft:5,
-        paddingRight:5,
+      },
+      imageBackground: {
+        flex: 1,
+        resizeMode: 'center',
+        opacity:0.8,
       },
     TextContainer:{
         marginTop:20,
@@ -21,7 +23,7 @@ export default StyleSheet.create ({
     },
     contentContainer:{
         padding:16,
-        marginTop:20,
+        marginTop:5,
     },
     input:{
         backgroundColor: "black",
@@ -31,33 +33,19 @@ export default StyleSheet.create ({
         paddingVertical: 14,
         borderRadius: 6,
     },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent:'space-evenly',
-        alignItems: 'center',
-        paddingHorizontal: 10,
-      },
+    ButtonContainer: {
+    flexDirection: "row",
+    marginTop:10,
+    marginBottom:5,
+    justifyContent:'flex-end'
+},
 advertisementItem: {
     padding: 10,
     marginVertical: 5,
-    backgroundColor: 'black',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
-  },
-  buttonaccept: {
-    backgroundColor: 'green', // Beyaz buton arka plan rengi
-    padding: 8,
-    borderRadius: 5,
-  },
-  buttonreject: {
-    backgroundColor: 'red', // Beyaz buton arka plan rengi
-    padding: 8,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'black', // Siyah buton metin rengi
-    fontWeight: 'bold',
+    borderColor: 'black',
   },
 
 })

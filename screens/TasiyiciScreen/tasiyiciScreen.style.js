@@ -5,9 +5,11 @@ export default StyleSheet.create ({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#FC9483',
-        paddingLeft:5,
-        paddingRight:5,
+      },
+      imageBackground: {
+        flex: 1,
+        resizeMode: 'center',
+        opacity:0.8,
       },
     TextContainer:{
         marginTop:20,
@@ -21,7 +23,7 @@ export default StyleSheet.create ({
     },
     contentContainer:{
         padding:16,
-        marginTop:20,
+        marginTop:5,
     },
     input:{
         backgroundColor: "black",
@@ -32,17 +34,18 @@ export default StyleSheet.create ({
         borderRadius: 6,
     },
     ButtonContainer: {
-flexDirection: "row",
-marginTop: 32,
-justifyContent:'flex-end'
+    flexDirection: "row",
+    marginTop:10,
+    marginBottom:5,
+    justifyContent:'space-between'
 },
 advertisementItem: {
     padding: 10,
     marginVertical: 5,
-    backgroundColor: 'black',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: 'black',
   },
 
 })

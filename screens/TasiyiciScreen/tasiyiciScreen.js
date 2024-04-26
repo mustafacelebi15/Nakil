@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Alert, ImageBackground} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
-
 import Button from '../../Components/Button';
 import styles from "./tasiyiciScreen.style";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const TasiyiciScreen = ({ navigation }) => {
   const [advertisements, setAdvertisements] = useState([]);
@@ -71,18 +71,36 @@ const TasiyiciScreen = ({ navigation }) => {
       </View>
     </TouchableOpacity>
   );
+  const removeLoginInfo = async () => {
+    try {
+      await AsyncStorage.removeItem('@email');
+      await AsyncStorage.removeItem('@password');
+      await AsyncStorage.removeItem('@hasLogin');
+      navigation.navigate('SignUp');
+    } catch (error) {
+      console.error('Error removing login information:', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
+      <ImageBackground style={styles.imageBackground} source={require('../../Assets/splashscrn.png')} >
+        <View style={styles.ButtonContainer}>
+      <Button title="Tekliflerimi görüntüle" onPress={() => navigation.navigate('TasOffers')} />
+      <Button title="Çıkış Yap" onPress={removeLoginInfo} />
+      </View>
+      <ScrollView>
+      <View style= {styles.contentContainer}>
       <FlatList
         data={advertisements}
         renderItem={renderAdvertisementItem}
         keyExtractor={(item) => item.id}
       />
-      <View style={styles.ButtonContainer}>
-      <Button title="Tekliflerimi görüntüle" onPress={() => navigation.navigate('TasOffers')} />
       </View>
+      </ScrollView>
+    </ImageBackground>
     </View>
+   
   );
 };
 
