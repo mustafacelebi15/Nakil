@@ -23,9 +23,9 @@ function MyStack() {
       <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="IsHome" component={IsHome} />
-      <Stack.Screen name="TasHome" component={TasHome} />
+      <Stack.Screen name="TasHome" component={TasHome} options={{ headerShown: false }}/>
       <Stack.Screen name= "IsOffers" component={IsOffers}/>
-      <Stack.Screen name= "TasOffers" component={TasOffers}/>
+      <Stack.Screen name= "TasOffers" component={TasOffers}  options={{ headerShown: false }}/>
     </Stack.Navigator>
     </NavigationContainer>
   );
