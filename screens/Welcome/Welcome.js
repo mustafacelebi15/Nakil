@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import { LogLevel, OneSignal } from 'react-native-onesignal';
@@ -90,8 +90,22 @@ const Welcome = ({ navigation }) => {
     }
   };
 
+  const handleTaşıyıcıPress = async () => {
+    setIsTasiyici(true);
+    addUser();
+  };
+
+  const handleİşverenPress = async () => {
+    setIsTasiyici(false);
+    addUser();
+  };
+
   return (
     <View style={styles.container}>
+      <ImageBackground style={styles.imageBackground} source={require('../../Assets/harita.jpg')} >
+      <View style={styles.ButtonContainerTop}>
+      <Button title="Çıkış Yap" onPress={removeLoginInfo} />
+      </View>
       <View style={styles.contentContainer}>
       <TextInput style={styles.input}
         placeholder="Name"
@@ -114,12 +128,11 @@ const Welcome = ({ navigation }) => {
         onChangeText={text => setTcId(text)}
       />
       <View style={styles.ButtonContainer}>
-      <Button title={"Taşıyıcı olmak istiyorum"} onPress={() => setIsTasiyici(true)}/>
-      <Button title={"İşveren olmak istiyorum"} onPress={() => setIsTasiyici(false)}/>
-      <Button title={"Kayıt ol"} onPress={addUser}/>
-      <Button title={"Çıkış Yap"} onPress={removeLoginInfo}/>
+      <Button title={"Taşıyıcı kaydı oluştur"} onPress={handleTaşıyıcıPress}/>
+      <Button title={"İşveren kaydı oluştur"} onPress={handleİşverenPress}/>
       </View>
       </View>
+      </ImageBackground>
     </View>
   );
 }

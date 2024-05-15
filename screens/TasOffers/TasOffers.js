@@ -6,7 +6,7 @@ import firestore from '@react-native-firebase/firestore';
 import Button from '../../Components/Button';
 import styles from "./TasOffers.style";
 
-const TasOffers = () => {
+const TasOffers = ({ navigation }) => {
   const [advertisements, setAdvertisements] = useState([]);
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState(null);

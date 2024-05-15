@@ -1,7 +1,11 @@
-import { StyleSheet } from "react-native";
+import { Button, StyleSheet } from "react-native";
 
 
 export default StyleSheet.create ({
+    imageBackground: {
+        flex: 1,
+        resizeMode: 'center',
+      },
     container:{
         flex:1,
         backgroundColor: '#FC9483',
@@ -12,16 +16,15 @@ export default StyleSheet.create ({
     },
     title: {
         fontSize:40,
-        color: "white",
         fontWeight:"800",
-        marginBottom: 16,
+        color: 'rgba(0, 0, 0, 0.5)',
     },
     contentContainer:{
         padding:16,
-        marginTop:20,
     },
     input:{
         backgroundColor: "black",
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
         fontSize: 15,
         marginTop: 20,
         paddingHorizontal: 16,
@@ -29,10 +32,14 @@ export default StyleSheet.create ({
         borderRadius: 6,
     },
     ButtonContainer: {
-flexDirection: "column",
+flexDirection: "row",
 marginTop: 32,
+justifyContent:'center',
+},
+ButtonContainerTop:{
+flexDirection: "row",
+marginTop: 10,
 justifyContent:'flex-end'
-
 },
 
 })
