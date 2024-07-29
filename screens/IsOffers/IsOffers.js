@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity, Alert, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 
@@ -82,11 +82,13 @@ const IsOffers = () => {
 
   return (
     <View style={styles.container}>
+      <ImageBackground style={styles.imageBackground} source={require('../../Assets/splashscrn.png')} >
       <FlatList
         data={advertisements}
         renderItem={renderAdvertisementItem}
         keyExtractor={(item) => item.id}
       />
+    </ImageBackground>
     </View>
   );
 };
