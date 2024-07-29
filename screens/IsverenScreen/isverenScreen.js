@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ImageBackground} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 
@@ -62,6 +62,11 @@ const isverenScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+       <ImageBackground style={styles.imageBackground} source={require('../../Assets/splashscrn.png')} >
+       <View style={styles.ButtonContainer}>
+      <Button title="Oluşturulan Teklifler" onPress={() => navigation.navigate('TasOffers')} />
+      <Button title="Çıkış Yap" onPress={removeLoginInfo} />
+      </View>
       <View style={styles.contentContainer}>
       <TextInput style={styles.input}
         placeholder="From"
@@ -78,12 +83,13 @@ const isverenScreen = ({ navigation }) => {
         value={price}
         onChangeText={text => setPrice(text)}
       />
+      </View>
       <View style={styles.ButtonContainer}>
       <Button title={"İlan oluştur."} onPress={addAdvert}/>
       <Button title={"Çıkış Yap"} onPress={removeLoginInfo}/>
-      <Button title={"Onay Bekleyen Teklifleri Görüntüle"} onPress={() => navigation.navigate('IsOffers')}/>
+      <Button title={"Onay Bekleyenler"} onPress={() => navigation.navigate('IsOffers')}/>
       </View>
-      </View>
+      </ImageBackground>
     </View>
   );
 }

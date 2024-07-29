@@ -68,6 +68,8 @@ const Welcome = ({ navigation }) => {
   };
 
   const addUser = async () => {
+    if(!Name || !Surname || !PhoneNumber || !TcId || !email){
+      Alert.alert('Bilgiler boş bırakılamaz');
     OneSignal.login(email);
     try {
       await firestore().collection('Users').add({
@@ -135,6 +137,7 @@ const Welcome = ({ navigation }) => {
       </ImageBackground>
     </View>
   );
+}
 }
 
 export default Welcome;

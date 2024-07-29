@@ -5,9 +5,6 @@ export default StyleSheet.create ({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#FC9483',
-        paddingLeft:5,
-        paddingRight:5,
       },
     TextContainer:{
         marginTop:20,
@@ -18,6 +15,11 @@ export default StyleSheet.create ({
         color: "white",
         fontWeight:"500",
         marginBottom: 10,
+    },
+    imageBackground: {
+      flex: 1,
+      resizeMode: 'center',
+      opacity:1,
     },
     contentContainer:{
         padding:16,
@@ -39,8 +41,8 @@ export default StyleSheet.create ({
       },
 advertisementItem: {
     padding: 10,
-    marginVertical: 5,
-    backgroundColor: 'black',
+    margin: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#ccc',
